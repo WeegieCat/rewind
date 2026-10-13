@@ -1,0 +1,23 @@
+# pipeline
+# GRIB2 原本
+pipeline/raw/
+# uv仮想環境
+pipeline/.venv/
+__pycache__/
+*.pyc
+# cfgrib が GRIB2 の横に作るインデックス
+*.idx
+
+# web
+web/node_modules/
+web/.next/
+web/out/
+web/next-env.d.ts
+
+# pipeline
+.env*
+!.env.example
+.DS_Store
+
+# AI coding
+.claude/
