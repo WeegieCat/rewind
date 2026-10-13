@@ -13,14 +13,19 @@ function project(lon: number, lat: number): [number, number] | null {
     const φ = lat * RAD;
     const φ0 = CENTER.lat * RAD;
 
-    const cosC = 0; // TODO 1: 裏側の判定に使う値
+    // 視点の中心とその地点のあいだの角度の余弦。負なら裏側
+    const cosC =
+        Math.sin(φ0) * Math.sin(φ) + Math.cos(φ0) * Math.cos(φ) * Math.cos(λ);
     if (cosC < 0) return null;
 
-    const x = 0; // TODO 2
-    const y = 0; // TODO 2
+    // 正射図法：球の中心が原点、上が正
+    const x = R * Math.cos(φ) * Math.sin(λ);
+    const y =
+        R *
+        (Math.cos(φ0) * Math.sin(φ) - Math.sin(φ0) * Math.cos(φ) * Math.cos(λ));
 
-    // TODO 3: 画面の中心に寄せて返す（y の向きに注意）
-    return [x, y];
+    // Canvas は左上が原点、下が正なので、中心に寄せて y を反転する
+    return [SIZE / 2 + x, SIZE / 2 - y];
 }
 
 // 点の列を線で結ぶ。裏側に入ったら線を切る
