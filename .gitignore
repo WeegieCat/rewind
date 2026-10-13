@@ -19,5 +19,6 @@ web/next-env.d.ts
 !.env.example
 .DS_Store
 
-# AI coding
+# 仮想環境、AIコーディング
 .claude/
+.vscode/
