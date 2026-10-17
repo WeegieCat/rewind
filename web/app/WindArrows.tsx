@@ -38,15 +38,17 @@ export default function WindArrows() {
 
                 for (let j = 0; j < ny; j += STEP) {
                     for (let i = 0; i < nx; i += STEP) {
-                        const k = 0; // TODO 1: 配列の位置
+                        const k = j * nx + i; // 1次元配列での位置
                         const lon = lo1 + i * dx;
                         const lat = la1 - j * dy;
 
-                        const x = 0; // TODO 2: 経度 → x
-                        const y = 0; // TODO 2: 緯度 → y
+                        // 正距円筒図法：経度・緯度をそのまま横・縦に置く
+                        const x = (lon / 360) * WIDTH;
+                        const y = ((90 - lat) / 180) * HEIGHT;
 
-                        const ex = x; // TODO 3: 矢印の先端の x（u を使う）
-                        const ey = y; // TODO 3: 矢印の先端の y（v を使う。向きに注意）
+                        // V は北（画面の上）が正、Canvas の y は下が正なので引く
+                        const ex = x + wind.u[k] * SCALE;
+                        const ey = y - wind.v[k] * SCALE;
 
                         // 根元の点
                         ctx.fillRect(x - 1, y - 1, 2, 2);
